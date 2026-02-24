@@ -11,7 +11,8 @@
     "@repo/typescript-config": "workspace:*"
   },
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.js",
+    "./user": "./dist/user.js"
   },
   "scripts": {
     "dev": "tsc --watch --preserveWatchOutput",

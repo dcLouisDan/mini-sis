@@ -45,6 +45,9 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
+      '@repo/validations':
+        specifier: workspace:*
+        version: link:../../packages/validations
       '@types/node':
         specifier: ^22.15.3
         version: 22.15.3

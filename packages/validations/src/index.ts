@@ -1,1 +1,3 @@
-export const validation = "valid output";
+import * as userValidations from "./user.js";
+
+export { userValidations };

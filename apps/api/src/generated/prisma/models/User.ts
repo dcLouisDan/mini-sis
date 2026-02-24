@@ -242,8 +242,8 @@ export type UserCreateInput = {
   email: string
   password_hash: string
   role?: string
-  created_at: Date | string
-  updated_at: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type UserUncheckedCreateInput = {
@@ -251,8 +251,8 @@ export type UserUncheckedCreateInput = {
   email: string
   password_hash: string
   role?: string
-  created_at: Date | string
-  updated_at: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type UserUpdateInput = {
@@ -278,8 +278,8 @@ export type UserCreateManyInput = {
   email: string
   password_hash: string
   role?: string
-  created_at: Date | string
-  updated_at: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {

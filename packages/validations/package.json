@@ -1,0 +1,20 @@
+{
+  "name": "@repo/validations",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "dependencies": {
+    "zod": "4.0.0"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsc --watch --preserveWatchOutput",
+    "build": "tsc"
+  }
+}

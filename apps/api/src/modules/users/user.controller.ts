@@ -84,6 +84,45 @@ export async function registerHandler(
   });
 }
 
+export async function getProfileHandler(
+  request: FastifyRequest,
+  reply: FastifyReply,
+) {
+  const { id } = request.user;
+
+  const res = await userService.getById(id);
+
+  if (res.ok) {
+    const { data: user } = res;
+
+    const responseData = {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    };
+
+    return reply.code(200).send(responseData);
+  }
+
+  const error = res.error;
+
+  if (error.type == "input") {
+    return reply.code(422).send({
+      message: error.raw.message,
+    });
+  }
+
+  if (error.type == "not-found") {
+    return reply.code(404).send({
+      message: error.raw.message,
+    });
+  }
+
+  return reply.code(500).send({
+    message: "Unknown error has occured",
+  });
+}
+
 export async function getUserHandler(
   request: FastifyRequest<{ Params: { id: string } }>,
   reply: FastifyReply,

@@ -52,6 +52,19 @@ async function userRoutes(server: FastifyInstance) {
     },
     handler: getUserHandler,
   });
+
+  // Get My Profile
+  server.withTypeProvider<ZodTypeProvider>().route({
+    method: "get",
+    url: "/me",
+    preHandler: [server.authenticate],
+    schema: {
+      response: {
+        200: getUserResponseSchema,
+      },
+    },
+    handler: getUserHandler,
+  });
 }
 
 export default userRoutes;

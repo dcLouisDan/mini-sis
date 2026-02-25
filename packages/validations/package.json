@@ -12,7 +12,12 @@
   },
   "exports": {
     ".": "./dist/index.js",
-    "./user": "./dist/user.js"
+    "./user": "./dist/user.js",
+    "./grade": "./dist/grade.js",
+    "./course": "./dist/course.js",
+    "./subject": "./dist/subject.js",
+    "./subject-prerequisite": "./dist/subject-prerequisite.js",
+    "./subject-reservation": "./dist/subject-reservation.js"
   },
   "scripts": {
     "dev": "tsc --watch --preserveWatchOutput",

@@ -51,7 +51,13 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User'
+  User: 'User',
+  Course: 'Course',
+  Subject: 'Subject',
+  SubjectPrerequisite: 'SubjectPrerequisite',
+  Student: 'Student',
+  SubjectReservation: 'SubjectReservation',
+  Grade: 'Grade'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -72,6 +78,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const UserScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   email: 'email',
   password_hash: 'password_hash',
   role: 'role',
@@ -80,6 +87,85 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const CourseScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
+
+
+export const SubjectScalarFieldEnum = {
+  id: 'id',
+  course_id: 'course_id',
+  code: 'code',
+  title: 'title',
+  units: 'units',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SubjectScalarFieldEnum = (typeof SubjectScalarFieldEnum)[keyof typeof SubjectScalarFieldEnum]
+
+
+export const SubjectPrerequisiteScalarFieldEnum = {
+  id: 'id',
+  subject_id: 'subject_id',
+  prerequisite_subject_id: 'prerequisite_subject_id',
+  created_at: 'created_at'
+} as const
+
+export type SubjectPrerequisiteScalarFieldEnum = (typeof SubjectPrerequisiteScalarFieldEnum)[keyof typeof SubjectPrerequisiteScalarFieldEnum]
+
+
+export const StudentScalarFieldEnum = {
+  id: 'id',
+  student_no: 'student_no',
+  first_name: 'first_name',
+  last_name: 'last_name',
+  email: 'email',
+  birth_date: 'birth_date',
+  course_id: 'course_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type StudentScalarFieldEnum = (typeof StudentScalarFieldEnum)[keyof typeof StudentScalarFieldEnum]
+
+
+export const SubjectReservationScalarFieldEnum = {
+  id: 'id',
+  student_id: 'student_id',
+  subject_id: 'subject_id',
+  reserved_at: 'reserved_at',
+  status: 'status'
+} as const
+
+export type SubjectReservationScalarFieldEnum = (typeof SubjectReservationScalarFieldEnum)[keyof typeof SubjectReservationScalarFieldEnum]
+
+
+export const GradeScalarFieldEnum = {
+  id: 'id',
+  student_id: 'student_id',
+  subject_id: 'subject_id',
+  course_id: 'course_id',
+  prelim: 'prelim',
+  midterm: 'midterm',
+  finals: 'finals',
+  final_grade: 'final_grade',
+  remarks: 'remarks',
+  encoded_by_user_id: 'encoded_by_user_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type GradeScalarFieldEnum = (typeof GradeScalarFieldEnum)[keyof typeof GradeScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -96,4 +182,12 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

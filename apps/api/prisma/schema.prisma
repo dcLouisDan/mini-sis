@@ -14,12 +14,107 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(uuid()) @db.Uuid
-  email         String   @unique
-  password_hash String
-  role          String   @default("encoder") // "encoder" | "admin" 
-  created_at    DateTime @default(now()) @db.Timestamptz()
-  updated_at    DateTime @updatedAt @db.Timestamptz()
+  id             String   @id @default(uuid()) @db.Uuid
+  name           String   @default("")
+  email          String   @unique
+  password_hash  String
+  role           String   @default("student") // "encoder" | "admin" | "student"
+  created_at     DateTime @default(now()) @db.Timestamptz()
+  updated_at     DateTime @updatedAt @db.Timestamptz()
+  encoded_grades Grade[]  @relation("EncodedByUser")
 
   @@map("users")
+}
+
+model Course {
+  id          String    @id @default(uuid()) @db.Uuid
+  code        String    @unique
+  name        String
+  description String
+  created_at  DateTime  @default(now()) @db.Timestamptz()
+  updated_at  DateTime  @updatedAt @db.Timestamptz()
+  subjects    Subject[]
+  students    Student[]
+  grades      Grade[]
+
+  @@map("courses")
+}
+
+model Subject {
+  id                  String                @id @default(uuid()) @db.Uuid
+  course              Course                @relation(fields: [course_id], references: [id])
+  course_id           String                @db.Uuid
+  code                String                @unique
+  title               String
+  units               Int
+  created_at          DateTime              @default(now()) @db.Timestamptz()
+  updated_at          DateTime              @updatedAt @db.Timestamptz()
+  prerequisites       SubjectPrerequisite[] @relation("SubjectHasPrerequisites")
+  requiredFor         SubjectPrerequisite[] @relation("IsPrerequisiteFor")
+  subjectReservations SubjectReservation[]
+  grades              Grade[]
+
+  @@map("subjects")
+}
+
+model SubjectPrerequisite {
+  id                      String  @id @default(uuid()) @db.Uuid
+  subject                 Subject @relation("SubjectHasPrerequisites", fields: [subject_id], references: [id])
+  subject_id              String  @db.Uuid
+  prerequisite_subject    Subject @relation("IsPrerequisiteFor", fields: [prerequisite_subject_id], references: [id])
+  prerequisite_subject_id String  @db.Uuid
+
+  created_at DateTime @default(now()) @db.Timestamptz()
+
+  @@map("subject_prerequisites")
+}
+
+model Student {
+  id                  String               @id @default(uuid()) @db.Uuid
+  student_no          String               @unique
+  first_name          String
+  last_name           String
+  email               String?              @unique
+  birth_date          DateTime             @db.Date
+  course              Course               @relation(fields: [course_id], references: [id])
+  course_id           String               @db.Uuid
+  created_at          DateTime             @default(now()) @db.Timestamptz()
+  updated_at          DateTime             @updatedAt @db.Timestamptz()
+  subjectReservations SubjectReservation[]
+  grades              Grade[]
+
+  @@map("students")
+}
+
+model SubjectReservation {
+  id          String   @id @default(uuid()) @db.Uuid
+  student     Student  @relation(fields: [student_id], references: [id])
+  student_id  String   @db.Uuid
+  subject     Subject  @relation(fields: [subject_id], references: [id])
+  subject_id  String   @db.Uuid
+  reserved_at DateTime @default(now()) @db.Timestamptz()
+  status      String   @default("reserved")
+
+  @@map("subject_reservations")
+}
+
+model Grade {
+  id                 String   @id @default(uuid()) @db.Uuid
+  student            Student  @relation(fields: [student_id], references: [id])
+  student_id         String   @db.Uuid
+  subject            Subject  @relation(fields: [subject_id], references: [id])
+  subject_id         String   @db.Uuid
+  course             Course   @relation(fields: [course_id], references: [id])
+  course_id          String   @db.Uuid // Matched type to the UUID id
+  prelim             Float    @default(0)
+  midterm            Float    @default(0)
+  finals             Float    @default(0)
+  final_grade        Float    @default(0)
+  remarks            String
+  encoded_by         User     @relation("EncodedByUser", fields: [encoded_by_user_id], references: [id])
+  encoded_by_user_id String   @db.Uuid
+  created_at         DateTime @default(now()) @db.Timestamptz()
+  updated_at         DateTime @updatedAt @db.Timestamptz()
+
+  @@map("grades")
 }

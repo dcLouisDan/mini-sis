@@ -9,4 +9,10 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
+export type * from './models/Course'
+export type * from './models/Subject'
+export type * from './models/SubjectPrerequisite'
+export type * from './models/Student'
+export type * from './models/SubjectReservation'
+export type * from './models/Grade'
 export type * from './commonInputTypes'

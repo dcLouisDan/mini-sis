@@ -14,7 +14,11 @@ export async function loginHandler(
     const { data: user } = res;
 
     const responseData = {
-      accessToken: request.jwt.sign({ id: user.id, email: user.email }),
+      accessToken: request.jwt.sign({
+        id: user.id,
+        email: user.email,
+        role: user.role,
+      }),
     };
 
     return reply.code(200).send(responseData);
@@ -51,7 +55,11 @@ export async function registerHandler(
     const { data: user } = res;
 
     const responseData = {
-      accessToken: request.jwt.sign({ id: user.id, email: user.email }),
+      accessToken: request.jwt.sign({
+        id: user.id,
+        email: user.email,
+        role: user.role,
+      }),
     };
 
     return reply.code(201).send(responseData);

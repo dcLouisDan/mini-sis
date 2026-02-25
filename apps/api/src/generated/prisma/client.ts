@@ -44,3 +44,33 @@ export { Prisma }
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model Course
+ * 
+ */
+export type Course = Prisma.CourseModel
+/**
+ * Model Subject
+ * 
+ */
+export type Subject = Prisma.SubjectModel
+/**
+ * Model SubjectPrerequisite
+ * 
+ */
+export type SubjectPrerequisite = Prisma.SubjectPrerequisiteModel
+/**
+ * Model Student
+ * 
+ */
+export type Student = Prisma.StudentModel
+/**
+ * Model SubjectReservation
+ * 
+ */
+export type SubjectReservation = Prisma.SubjectReservationModel
+/**
+ * Model Grade
+ * 
+ */
+export type Grade = Prisma.GradeModel

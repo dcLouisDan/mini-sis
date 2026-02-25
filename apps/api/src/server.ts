@@ -1,5 +1,10 @@
 import Fastify, { type FastifyReply, type FastifyRequest } from "fastify";
 import fastifyJwt, { type JWT } from "@fastify/jwt";
+import {
+  serializerCompiler,
+  validatorCompiler,
+} from "fastify-type-provider-zod";
+import userRoutes from "./modules/users/user.routes";
 
 declare module "fastify" {
   interface FastifyRequest {
@@ -24,6 +29,9 @@ function buildServer() {
     logger: true,
   });
 
+  server.setValidatorCompiler(validatorCompiler);
+  server.setSerializerCompiler(serializerCompiler);
+
   server.register(fastifyJwt, {
     secret: "my-secret",
   });
@@ -47,6 +55,8 @@ function buildServer() {
     req.jwt = server.jwt;
     return next();
   });
+
+  server.register(userRoutes, { prefix: "auth" });
 
   return server;
 }

@@ -1,4 +1,4 @@
-import z from "zod";
+import z, { email } from "zod";
 
 export const createUserSchema = z
   .object({
@@ -8,7 +8,7 @@ export const createUserSchema = z
     role: z.string().optional().default("student"),
   })
   .refine(
-    ({ password, password_confirmation }) => password !== password_confirmation,
+    ({ password, password_confirmation }) => password == password_confirmation,
     {
       error: "Passwords do not match",
       path: ["password_confirmation"],
@@ -18,6 +18,14 @@ export const createUserSchema = z
 export type CreateUserInput = z.input<typeof createUserSchema>;
 export type CreateUserOutput = z.output<typeof createUserSchema>;
 
+export const registerUserResponseSchema = z.object({
+  accessToken: z.string(),
+});
+
+export type RegisterUserResponseOutput = z.output<
+  typeof registerUserResponseSchema
+>;
+
 export const updateUserSchema = z
   .object({
     email: z.email(),
@@ -26,7 +34,7 @@ export const updateUserSchema = z
     role: z.string().optional().default("student"),
   })
   .refine(
-    ({ password, password_confirmation }) => password !== password_confirmation,
+    ({ password, password_confirmation }) => password === password_confirmation,
     {
       error: "Passwords do not match",
       path: ["password_confirmation"],
@@ -43,3 +51,17 @@ export const loginUserSchema = z.object({
 
 export type LoginUserInput = z.input<typeof loginUserSchema>;
 export type LoginUserOutput = z.output<typeof loginUserSchema>;
+
+export const loginUserResponseSchema = z.object({
+  accessToken: z.string(),
+});
+
+export type LoginUserResponseOutput = z.output<typeof loginUserResponseSchema>;
+
+export const getUserResponseSchema = z.object({
+  id: z.string(),
+  email: z.email(),
+  role: z.string(),
+});
+
+export type GetUserResponseOutput = z.output<typeof getUserResponseSchema>;

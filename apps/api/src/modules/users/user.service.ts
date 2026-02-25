@@ -66,6 +66,21 @@ export const userService = {
       return { ok: false, error: { type: "unknown", raw: err as Error } };
     }
   },
+  getById: async (user_id: string): Promise<ServiceResult<User>> => {
+    try {
+      const user = await prisma.user.findFirst({ where: { id: user_id } });
+      if (!user) {
+        return {
+          ok: false,
+          error: { type: "not-found", raw: new Error("User not found") },
+        };
+      }
+
+      return { ok: true, data: user };
+    } catch (err) {
+      return { ok: false, error: { type: "unknown", raw: err as Error } };
+    }
+  },
   update: async (
     user_id: string,
     data: UpdateUserOutput,

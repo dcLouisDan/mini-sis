@@ -27,7 +27,6 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "moduleResolution": "bundler",
-    "esModuleInterop": true,
-    "ignoreDeprecations": "6.0"
+    "esModuleInterop": true
   }
 }

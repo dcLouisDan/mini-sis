@@ -35,3 +35,11 @@ export const updateUserSchema = z
 
 export type UpdateUserInput = z.input<typeof updateUserSchema>;
 export type UpdateUserOutput = z.output<typeof updateUserSchema>;
+
+export const loginUserSchema = z.object({
+  email: z.email(),
+  password: z.string().min(1),
+});
+
+export type LoginUserInput = z.input<typeof loginUserSchema>;
+export type LoginUserOutput = z.output<typeof loginUserSchema>;

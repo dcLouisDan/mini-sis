@@ -2,10 +2,10 @@
   "name": "@apps/api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
-    "dev": "ts-node src/server.ts",
+    "dev": "tsx watch src/app.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,8 +14,10 @@
   "license": "ISC",
   "dependencies": {
     "@fastify/env": "^5.0.3",
+    "@fastify/jwt": "^10.0.0",
     "@prisma/adapter-pg": "^7.4.1",
     "@prisma/client": "^7.4.1",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.3.1",
     "fastify": "^5.7.4",
     "pg": "^8.18.0"
@@ -24,10 +26,12 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@repo/validations": "workspace:*",
+    "@types/bcrypt": "^6.0.0",
     "@types/node": "^22.15.3",
     "@types/pg": "^8.16.0",
     "prisma": "^7.4.1",
     "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }
